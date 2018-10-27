@@ -102,3 +102,21 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# data
+female_images/
+female_landmarks/
+images/
+landmarks/
+male_images/
+male_landmarks/
+
+# generated data
+*.mat
+
+# report
+*.pdf
+
+# mac-generated
+.DS_Store
+.idea/
