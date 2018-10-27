@@ -110,6 +110,7 @@ images/
 landmarks/
 male_images/
 male_landmarks/
+aligned_images/
 
 # generated data
 *.mat

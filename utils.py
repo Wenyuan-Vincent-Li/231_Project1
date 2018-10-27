@@ -5,7 +5,7 @@ import skimage
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import scipy.io
-
+import mywarper
 
 def files_under_folder_with_suffix(dir_name, suffix = ''):
     """
@@ -130,3 +130,11 @@ def reconstructed_loss_landmark(X_center, eigen_warpings):
     loss = np.square(X_center - recons)
     loss = np.sum(loss) / (loss.shape[0] * loss.shape[1])
     return loss
+
+def generate_aligned_images(image_folder, landmark_folder, im_file, LM_file, aligned_folder, target_LM):
+    assert len(im_file) == len(LM_file), "Image number and landmark number don't match!"
+    for i in range(len(im_file)):
+        im = skimage.io.imread(join(image_folder, im_file[i]))
+        org_LM = scipy.io.loadmat(join(landmark_folder, LM_file[i]))['lms']
+        warp_im = mywarper.warp(im, org_LM, target_LM)
+        skimage.io.imsave(join(aligned_folder, im_file[i]), warp_im)
