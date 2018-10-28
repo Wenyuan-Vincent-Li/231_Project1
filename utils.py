@@ -138,3 +138,9 @@ def generate_aligned_images(image_folder, landmark_folder, im_file, LM_file, ali
         org_LM = scipy.io.loadmat(join(landmark_folder, LM_file[i]))['lms']
         warp_im = mywarper.warp(im, org_LM, target_LM)
         skimage.io.imsave(join(aligned_folder, im_file[i]), warp_im)
+
+def reconstruct_landmark(X_test_LM, mean_LM, eigen_warping):
+    coef = np.matmul(X_test_LM - mean_LM, eigen_warping.T)
+    recons_LM = np.matmul(coef, eigen_warping) + mean_LM
+    recons_LM = recons_LM.reshape((recons_LM.shape[0], 68, 2))
+    return recons_LM
