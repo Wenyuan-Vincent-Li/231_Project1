@@ -115,6 +115,8 @@ aligned_images/
 # generated data
 *.mat
 *.tfrecords
+Weight/
+Log/
 
 # report
 *.pdf
